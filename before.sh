@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # sources.list
-sed -e 's/http.*ubuntu.com/http:\/\/mirrors.aliyun.com/g' -e 's/^# deb/deb/g' -i.bak /etc/apt/sources.list
-sudo apt update
+sudo sed -e 's/http.*ubuntu.com/http:\/\/mirrors.aliyun.com/g' -e 's/^# deb/deb/g' -i.bak /etc/apt/sources.list
+sudo apt-get update
 # yarn
 yarn config set registry http://registry.npmmirror.com
 # npm
