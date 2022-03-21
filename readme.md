@@ -18,5 +18,7 @@ git clone https://github.com/yiming0/homestead.git
 
 cd homestead
 
+./init
+
 vagrant up
 ```
