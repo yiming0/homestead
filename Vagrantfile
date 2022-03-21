@@ -9,6 +9,7 @@ confDir = $confDir ||= File.expand_path(File.dirname(__FILE__))
 
 homesteadYamlPath = confDir + "/Homestead.yaml"
 homesteadJsonPath = confDir + "/Homestead.json"
+beforeScriptPath = confDir + "/before.sh"
 afterScriptPath = confDir + "/after.sh"
 customizationScriptPath = confDir + "/user-customizations.sh"
 aliasesPath = confDir + "/aliases"
@@ -31,6 +32,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         settings = JSON::parse(File.read(homesteadJsonPath))
     else
         abort "Homestead settings file not found in #{confDir}"
+    end
+
+    if File.exist? beforeScriptPath then
+        config.vm.provision "Run before.sh", type: "shell", path: beforeScriptPath, privileged: false, keep_color: true
     end
 
     Homestead.configure(config, settings)
